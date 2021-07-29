@@ -38,26 +38,55 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+        title: Row(
+          children: [
+            Icon(Icons.create),
+            Text("初めてのタイトル"),
           ],
         ),
       ),
+      drawer: Drawer(
+        child: Center(
+          child: Text("Drawer"),
+        ),
+      ),
+      body: Column(
+        children: [
+          Text("初めてのテキスト"),
+          Text("2番目のテキスト"),
+          TextButton(
+            onPressed: () {
+              print("ボタンが押されたよ");
+            },
+            child: Text("更新"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Icon(
+                Icons.favorite,
+                color: Colors.pink,
+                size: 24,
+              ),
+              Icon(
+                Icons.audiotrack,
+                color: Colors.green,
+                size: 30,
+              ),
+              Icon(
+                Icons.beach_access,
+                color: Colors.blue,
+                size: 30,
+              ),
+            ],
+          )
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: () {
+          print("押したね？");
+        },
+        child: Icon(Icons.timer),
       ),
     );
   }
