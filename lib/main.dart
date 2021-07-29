@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -80,6 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            IconButton(
+                onPressed: () async {
+                  final url = Uri.encodeFull("https://fastriver.dev");
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
+                },
+                icon: Icon(Icons.open_in_browser))
           ],
         ),
       ),
