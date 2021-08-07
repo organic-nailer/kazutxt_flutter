@@ -27,6 +27,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late AnimationController _controller;
+  late Animation<double> _animationDouble;
+  Tween<double> _tweenDouble = Tween(begin: 0.0, end: 200.0);
+  late Animation<Color?> _animationColor;
+  ColorTween _tweenColor = ColorTween(begin: Colors.green, end: Colors.blue);
 
   void _play() {
     _controller.forward();
@@ -45,6 +49,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 3));
+    _animationDouble = _tweenDouble.animate(_controller);
+    _animationDouble.addListener(() {
+      setState(() {});
+    });
+    _animationColor = _tweenColor.animate(_controller);
+    _animationColor.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -63,14 +75,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text("AnimationController:${_controller.value}"),
+              Text("AnimationDouble:${_animationDouble.value}"),
+              Text("AnimationColor:${_animationColor.value}"),
               SizeTransition(
                 sizeFactor: _controller,
                 child: Center(
                   child: SizedBox(
-                    width: 50,
-                    height: 50,
+                    width: _animationDouble.value,
+                    height: _animationDouble.value,
                     child: Container(
-                      color: Colors.green,
+                      color: _animationColor.value,
                     ),
                   ),
                 ),
