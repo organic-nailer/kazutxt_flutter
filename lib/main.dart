@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazutxt_flutter/dummy.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,13 +30,33 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    print("call setState");
     setState(() {
       _counter++;
     });
+    nextPage();
+  }
+
+  void nextPage() async {
+    await Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => DummyPage()));
+  }
+
+  @override
+  void initState() {
+    print("call initState");
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    print("call didChangeDependencies");
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("call build");
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -60,5 +81,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(covariant MyHomePage oldWidget) {
+    print("call didUpdateWidget");
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void deactivate() {
+    print("call deactivate");
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    print("call dispose");
+    super.dispose();
   }
 }
