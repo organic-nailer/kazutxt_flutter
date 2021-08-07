@@ -25,12 +25,12 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  bool _flag = false;
 
-  void _incrementCounter() {
+  void _click() {
     setState(() {
-      _counter++;
+      _flag = !_flag;
     });
   }
 
@@ -44,18 +44,41 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            AnimatedOpacity(
+              opacity: _flag ? 0.1 : 1.0,
+              duration: Duration(seconds: 3),
+              child: Text(
+                "消える文字",
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            AnimatedSize(
+              duration: Duration(seconds: 3),
+              vsync: this,
+              child: SizedBox(
+                width: _flag ? 50 : 200,
+                height: _flag ? 50 : 200,
+                child: Container(
+                  color: Colors.purple,
+                ),
+              ),
             ),
+            AnimatedAlign(
+              alignment: _flag ? Alignment.topLeft : Alignment.bottomRight,
+              duration: Duration(seconds: 3),
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: Container(
+                  color: Colors.green,
+                ),
+              ),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _click,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
