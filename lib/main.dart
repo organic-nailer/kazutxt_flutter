@@ -16,11 +16,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
-      routes: {
-        "/test1": (_) => TestPage1(),
-        "/test2": (_) => TestPage2(),
-        "/test3": (_) => TestPage3(),
-      },
     );
   }
 }
@@ -34,8 +29,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late PageController _controller;
+  int _selectedIndex = 0;
+
+  var _pages = [TestPage1(), TestPage2(), TestPage3()];
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(initialPage: _selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: TestPage1());
+    return PageView(
+      controller: _controller,
+      onPageChanged: _onPageChanged,
+      children: _pages,
+    );
   }
 }
