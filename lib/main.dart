@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kazutxt_flutter/test_page1.dart';
+import 'package:kazutxt_flutter/test_page2.dart';
+import 'package:kazutxt_flutter/test_page3.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +16,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        "/test1": (_) => TestPage1(),
+        "/test2": (_) => TestPage2(),
+        "/test3": (_) => TestPage3(),
+      },
     );
   }
 }

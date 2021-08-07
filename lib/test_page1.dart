@@ -15,8 +15,7 @@ class TestPage1 extends StatelessWidget {
             style: TextStyle(fontSize: 80),
           ),
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => TestPage2()));
+            Navigator.of(context).pushNamed("/test2");
           },
         ),
       ),
