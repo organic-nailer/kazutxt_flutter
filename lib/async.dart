@@ -16,4 +16,30 @@ class Async {
     sleep(Duration(seconds: time));
     return name + ":" + DateTime.now().toString();
   }
+
+  void asyncTest2() {
+    print("method begin");
+    print(DateTime.now().toString());
+    print("data1 start");
+    var result1 = asyncFunc("data1", 3);
+    result1.then((result) {
+      print(result);
+    });
+    print("data2 start");
+    var result2 = asyncFunc("data2", 2);
+    result2.then((result) {
+      print(result);
+    });
+    print("data3 start");
+    var result3 = asyncFunc("data3", 1);
+    result3.then((result) {
+      print(result);
+    });
+  }
+
+  Future<String> asyncFunc(String name, int time) async {
+    return Future.delayed(Duration(seconds: time), () {
+      return name + ":" + DateTime.now().toString();
+    });
+  }
 }

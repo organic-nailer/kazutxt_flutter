@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    Async().asyncTest1();
+    Async().asyncTest2();
   }
 
   @override
