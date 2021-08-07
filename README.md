@@ -1,6 +1,6 @@
 # kazutxt_flutter
 
-A new Flutter project.
+[kazutxtさん](https://zenn.dev/kazutxt/)の[Flutter実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction)を読んで実装するリポジトリ
 
 ## Getting Started
 
