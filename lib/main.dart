@@ -26,50 +26,74 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  bool _flag = false;
+  late AnimationController _controller;
 
-  void _click() {
-    setState(() {
-      _flag = !_flag;
-    });
+  void _play() {
+    _controller.forward();
+  }
+
+  void _stop() {
+    _controller.stop();
+  }
+
+  void _reverse() {
+    _controller.reverse();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            AnimatedContainer(
-              duration: Duration(seconds: 3),
-              width: _flag ? 100 : 50,
-              height: _flag ? 50 : 100,
-              padding: _flag ? EdgeInsets.all(0) : EdgeInsets.all(30),
-              margin: _flag ? EdgeInsets.all(0) : EdgeInsets.all(30),
-              transform: _flag ? Matrix4.skewX(0) : Matrix4.skewX(0.3),
-              color: _flag ? Colors.blue : Colors.grey,
-            ),
-            AnimatedSwitcher(
-              duration: Duration(seconds: 3),
-              child: _flag
-                  ? Text("なにもない")
-                  : Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-            )
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _click,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizeTransition(
+                sizeFactor: _controller,
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Container(
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FloatingActionButton(
+              onPressed: _play,
+              child: Icon(Icons.arrow_forward),
+            ),
+            FloatingActionButton(
+              onPressed: _stop,
+              child: Icon(Icons.pause),
+            ),
+            FloatingActionButton(
+              onPressed: _reverse,
+              child: Icon(Icons.arrow_back),
+            ),
+          ],
+        ));
   }
 }
