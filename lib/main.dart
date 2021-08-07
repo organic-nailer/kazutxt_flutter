@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazutxt_flutter/async.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+    Async().asyncTest1();
   }
 
   @override
