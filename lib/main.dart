@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as Math;
 
 void main() {
   runApp(MyApp());
@@ -27,10 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animationDouble;
-  Tween<double> _tweenDouble = Tween(begin: 0.0, end: 200.0);
-  late Animation<Color?> _animationColor;
-  ColorTween _tweenColor = ColorTween(begin: Colors.green, end: Colors.blue);
+  late Animation _animation;
 
   void _play() {
     _controller.forward();
@@ -48,15 +46,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 3));
-    _animationDouble = _tweenDouble.animate(_controller);
-    _animationDouble.addListener(() {
-      setState(() {});
-    });
-    _animationColor = _tweenColor.animate(_controller);
-    _animationColor.addListener(() {
-      setState(() {});
-    });
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _animation = _controller.drive(Tween(begin: 0.0, end: 2 * Math.pi));
   }
 
   @override
@@ -72,27 +63,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           title: Text(widget.title),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("AnimationController:${_controller.value}"),
-              Text("AnimationDouble:${_animationDouble.value}"),
-              Text("AnimationColor:${_animationColor.value}"),
-              SizeTransition(
-                sizeFactor: _controller,
-                child: Center(
-                  child: SizedBox(
-                    width: _animationDouble.value,
-                    height: _animationDouble.value,
-                    child: Container(
-                      color: _animationColor.value,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+            child: AnimatedBuilder(
+                animation: _animation,
+                builder: (_, __) => Transform.rotate(
+                      angle: _animation.value,
+                      child: Icon(
+                        Icons.cached,
+                        size: 100,
+                      ),
+                    ))),
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
