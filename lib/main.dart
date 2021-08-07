@@ -25,13 +25,45 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    print("dispose");
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("state = $state");
+    switch (state) {
+      case AppLifecycleState.inactive:
+        print("非アクティブになったときの処理");
+        break;
+      case AppLifecycleState.paused:
+        print("停止されたときの処理");
+        break;
+      case AppLifecycleState.resumed:
+        print("再開されたときの処理");
+        break;
+      case AppLifecycleState.detached:
+        print("破棄されたときの処理");
+        break;
+    }
   }
 
   @override
