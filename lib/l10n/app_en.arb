@@ -1,0 +1,17 @@
+{
+	"@@locale": "en",
+	"hello": "Hello {name}",
+	"@hello": {
+		"description": "welcome message",
+		"placeholders": {
+			"name": {
+				"description": "username",
+				"example": "fastriver"
+			}
+		}
+	},
+	"login": "Login",
+	"info": "Info",
+	"allow": "ALLOW!",
+	"deny": "DENY!"
+}
