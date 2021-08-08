@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class MyInheritedWidget extends InheritedWidget {
-  final String message;
+  final int count;
 
-  MyInheritedWidget({required this.message, required Widget child})
+  MyInheritedWidget({required this.count, required Widget child})
       : super(child: child);
 
   static MyInheritedWidget of(BuildContext context) =>
@@ -13,5 +12,5 @@ class MyInheritedWidget extends InheritedWidget {
 
   @override
   bool updateShouldNotify(MyInheritedWidget oldWidget) =>
-      oldWidget.message != message;
+      oldWidget.count != count && count % 2 == 0;
 }

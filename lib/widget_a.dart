@@ -7,7 +7,6 @@ class WidgetA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyInheritedWidget _inherited = MyInheritedWidget.of(context);
-    String message = _inherited.message;
-    return Text(message);
+    return Text("${_inherited.count}");
   }
 }
