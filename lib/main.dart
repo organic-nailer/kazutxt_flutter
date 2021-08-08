@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:kazutxt_flutter/bussiness_logic.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,11 +30,34 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  var intStream = StreamController<int>();
+  var stringStream = StreamController<String>.broadcast();
+  var generator = Generator();
+  var coordinator = Coordinator();
+  var consumer = Consumer();
 
   void _incrementCounter() {
+    generator.generate();
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    generator.init(intStream);
+    coordinator.init(intStream, stringStream);
+    consumer.init(stringStream);
+    coordinator.coordinate();
+    consumer.consume();
+  }
+
+  @override
+  void dispose() {
+    intStream.close();
+    stringStream.close();
+    super.dispose();
   }
 
   @override
@@ -51,6 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            StreamBuilder<String>(
+              stream: stringStream.stream,
+              initialData: "",
+              builder: (context, snapshot) {
+                return Text(
+                  "RANDOM: ${snapshot.data}",
+                  style: Theme.of(context).textTheme.headline4,
+                );
+              },
+            )
           ],
         ),
       ),
