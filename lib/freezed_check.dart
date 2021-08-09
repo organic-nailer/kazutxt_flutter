@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:kazutxt_flutter/user.dart';
 
 void func() {
@@ -22,4 +24,14 @@ void func() {
   print(user2);
 
   // user1.name = "unknown";
+}
+
+void func2() {
+  String jsonString = '{"name":"fastriver","age":30}';
+  User fromJsonUser = User.fromJson(json.decode(jsonString));
+  print(fromJsonUser);
+
+  User toJsonUser = User("fastriver2", 32);
+  var jsonData = toJsonUser.toJson();
+  print(jsonData);
 }
