@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kazutxt_flutter/my_data.dart';
-import 'package:kazutxt_flutter/slider.dart';
-import 'package:kazutxt_flutter/widget_a.dart';
-import 'package:provider/provider.dart';
+
+final _myDataProvider =
+    StateNotifierProvider<MyData, double>((ref) => MyData());
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,34 +31,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => MyData(),
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Consumer<MyData>(
-                builder: (_, myData, __) => Text(
-                  myData.value.toStringAsFixed(2),
-                  style: TextStyle(fontSize: 100),
-                ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Consumer(
+              builder: (context, watch, child) => Text(
+                watch(_myDataProvider).toStringAsFixed(2),
+                style: TextStyle(fontSize: 100),
               ),
-              MySlider()
-            ],
-          )),
-    );
+            ),
+            Consumer(
+              builder: (context, watch, child) {
+                return Slider(
+                  value: watch(_myDataProvider),
+                  onChanged: (value) =>
+                      context.read(_myDataProvider.notifier).changeState(value),
+                );
+              },
+            )
+          ],
+        ));
   }
 }
