@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:kazutxt_flutter/my_data.dart';
 
 final _myDataProvider =
@@ -37,25 +40,28 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Consumer(
-              builder: (context, watch, child) => Text(
-                watch(_myDataProvider).toStringAsFixed(2),
-                style: TextStyle(fontSize: 100),
-              ),
-            ),
-            Consumer(
-              builder: (context, watch, child) {
-                return Slider(
-                  value: watch(_myDataProvider),
-                  onChanged: (value) =>
-                      context.read(_myDataProvider.notifier).changeState(value),
-                );
-              },
-            )
-          ],
-        ));
+        body: MyContents());
+  }
+}
+
+class MyContents extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _value = useProvider(_myDataProvider);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          _value.toStringAsFixed(2),
+          style: TextStyle(fontSize: 100),
+        ),
+        Slider(
+          value: _value,
+          onChanged: (value) =>
+              context.read(_myDataProvider.notifier).changeState(value),
+        )
+      ],
+    );
   }
 }
