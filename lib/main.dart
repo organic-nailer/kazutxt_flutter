@@ -37,7 +37,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final Widget _widget = Center(
-    child: WidgetA(),
+    child: Consumer<int>(
+      builder: (context, value, _) => Text(
+        value.toString(),
+        style: TextStyle(fontSize: 100),
+      ),
+    ),
   );
 
   @override
