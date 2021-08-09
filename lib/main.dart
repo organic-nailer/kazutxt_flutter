@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kazutxt_flutter/my_data.dart';
+import 'package:kazutxt_flutter/slider.dart';
 import 'package:kazutxt_flutter/widget_a.dart';
 import 'package:provider/provider.dart';
 
@@ -36,27 +38,26 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final Widget _widget = Center(
-    child: Consumer<int>(
-      builder: (context, value, _) => Text(
-        value.toString(),
-        style: TextStyle(fontSize: 100),
-      ),
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Provider<int>.value(value: _counter, child: _widget),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+    return ChangeNotifierProvider(
+      create: (_) => MyData(),
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Consumer<MyData>(
+                builder: (_, myData, __) => Text(
+                  myData.value.toStringAsFixed(2),
+                  style: TextStyle(fontSize: 100),
+                ),
+              ),
+              MySlider()
+            ],
+          )),
     );
   }
 }
