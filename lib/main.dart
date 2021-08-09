@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kazutxt_flutter/my_inherited_widget.dart';
 import 'package:kazutxt_flutter/widget_a.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: MyInheritedWidget(count: _counter, child: _widget),
+      body: Provider<int>.value(value: _counter, child: _widget),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

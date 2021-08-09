@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:kazutxt_flutter/my_inherited_widget.dart';
+import 'package:provider/provider.dart';
 
 class WidgetA extends StatelessWidget {
   const WidgetA({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    MyInheritedWidget _inherited = MyInheritedWidget.of(context);
-    return Text("${_inherited.count}");
+    int count;
+    try {
+      count = Provider.of<int>(context);
+    } catch (e) {
+      count = 0;
+    }
+    return Text(
+      "$count",
+      style: TextStyle(fontSize: 100),
+    );
   }
 }
