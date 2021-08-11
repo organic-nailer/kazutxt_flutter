@@ -4,15 +4,23 @@
 
 各ブランチでそれぞれのchapterをやっています
 
-- [chapter7](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter7)
-- [chapter8](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter8)
-- [chapter9](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter9)
-- [chapter10](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter10)
-- [chapter11](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter11)
-- [chapter12](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter12)
-- [chapter16](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter16)
-- [chapter18](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter18)
-- [chapter19](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter19)
+- [chapter7 画面の構築](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter7)
+- [chapter8 画面の更新](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter8)
+- [chapter9 パッケージ](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter9)
+- [chapter10 テスト](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter10)
+- [chapter11 ページ遷移](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter11)
+- [chapter12 アニメーション](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter12)
+- [chapter16 非同期処理](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter16)
+- [chapter18 StatefulWidgetのライフサイクル](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter18)
+- [chapter19 アプリのライフサイクル](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter19)
+- [chapter20 BLoC](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter20)
+- [chapter21 多言語対応](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter21)
+- [chapter23 Key](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter23)
+- [chapter25 InheritedWidget](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter25)
+- [chapter26 Provider](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter26)
+- [chapter27 Riverpod](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter27)
+- [chapter28 freezed](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter28)
+- [chapter29 アイソレータ](https://github.com/organic-nailer/kazutxt_flutter/tree/chapter29)
 
 ## Getting Started
 
