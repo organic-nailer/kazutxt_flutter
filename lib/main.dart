@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,10 +31,41 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  Future _incrementCounter() async {
+    var receivePort = ReceivePort();
+    var sendPort = receivePort.sendPort;
+    late Capability capability;
+
+    receivePort.listen((message) {
+      print(message);
+      //receivePort.close();
+    });
+
+    final isolate = await Isolate.spawn(child, sendPort);
+
+    Timer(Duration(seconds: 5), () {
+      print("pausing");
+      capability = isolate.pause();
+    });
+
+    Timer(Duration(seconds: 10), () {
+      print("resume");
+      isolate.resume(capability);
+    });
+
+    Timer(Duration(seconds: 15), () {
+      print("kill");
+      isolate.kill();
+    });
+
     setState(() {
       _counter++;
     });
+  }
+
+  static void child(SendPort port) {
+    int i = 0;
+    Timer.periodic(Duration(seconds: 1), (timer) => port.send(i++));
   }
 
   @override
